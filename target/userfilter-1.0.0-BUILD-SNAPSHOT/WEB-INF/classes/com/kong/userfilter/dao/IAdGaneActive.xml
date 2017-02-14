@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kong.userfilter.dao.IAdGaneActive">
+
+	<resultMap type="AdGameActiveBean" id="AdGameActiveBeanMap">
+		<result column="game" property="game" />
+		<result column="channel" property="channal" />
+		<result column="idfa" property="idfa" />
+		<result column="clicktime" property="clickTime" />
+		<result column="activetime" property="activeTime" />
+		<result column="otheridfa" property="otherIdfa" />
+	</resultMap>
+
+	<select id="getGameIdInTime" resultType="int">
+		select DISTINCT game
+		from AD_GAME_ACTIVE where ACTIVETIME like '${time}%'
+	</select>
+
+</mapper>
+	
+	
+	

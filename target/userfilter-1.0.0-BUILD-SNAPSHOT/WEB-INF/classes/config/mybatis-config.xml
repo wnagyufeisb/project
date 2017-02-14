@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 为实体类起别名 -->
+	<typeAliases>
+		<typeAlias alias="AdGameActiveBean"
+			type="com.kong.userfilter.beans.AdGameActiveBean" />
+		<typeAlias alias="GameFilterBean" type="com.kong.userfilter.beans.GameFilterBean" />
+	</typeAliases>
+	<environments default="GameUserFilter">
+		<environment id="49GameUserFilter">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@
+		                           (DESCRIPTION =
+   (ADDRESS_LIST =
+     (LOAD_BALANCE=no)
+     (FAILOVER=ON)
+     (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.12.49)(PORT = 1521))
+   )
+   (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = zaradb)
+      (FAILOVER_MODE =
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+      )
+   )
+)
+									"></property>
+				<property name="username" value="game" />
+				<property name="password" value="PRVXWFxSOa" />
+			</dataSource>
+
+		</environment>
+
+		<environment id="45GameUserFilter">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+					<property name="url"
+					value="jdbc:oracle:thin:@
+		                       (DESCRIPTION =
+	(ADDRESS_LIST =
+	(LOAD_BALANCE=no)
+	(FAILOVER=ON)
+	(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.12.45)(PORT = 1521))
+        (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.12.42)(PORT = 1521))
+	)
+	(CONNECT_DATA =
+	(SERVER = DEDICATED)
+	(SERVICE_NAME = zaradb)
+	(FAILOVER_MODE =
+	(TYPE = SELECT)
+	(METHOD = BASIC)
+	)
+	)
+)"></property>
+				<property name="username" value="game_oper" />
+				<property name="password" value="Ujnmk9olt3" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<package name="com.kong.userfilter.dao" />
+	</mappers>
+</configuration>

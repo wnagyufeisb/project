@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kong.center.dao.IRegisterLog">
+
+	<resultMap type="RegisterLogBean" id="RegisterLogMap">
+		<result column="code" property="code" />
+		<result column="guid" property="guid" />
+		<result column="register_user" property="registerUser" />
+		<result column="register_type" property="registerType" />
+		<result column="ip" property="ip" />
+		<result column="device_id" property="deviceId" />
+		<result column="device_type" property="deviceType" />
+		<result column="system_version" property="systemVersion" />
+		<result column="system_type" property="systemType" />
+		<result column="game" property="game" />
+		<result column="channel" property="channel" />
+		<result column="other_info" property="otherInfo" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+
+
+	<insert id="addRegisterLog">
+		insert into game_center_register_log_tb
+		(guid,register_user,register_type,ip,device_id,device_type,system_version,system_type,game,channel,other_info,create_time)
+		values
+		(#{guid},#{registerUser},#{registerType},#{ip},#{deviceId},#{deviceType},#{systemVersion},#{systemType},#{game},#{channel},#{otherInfo},#{createTime})
+	</insert>
+</mapper>

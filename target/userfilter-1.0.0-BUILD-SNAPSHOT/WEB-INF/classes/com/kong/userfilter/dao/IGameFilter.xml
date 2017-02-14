@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kong.userfilter.dao.IGameFilter">
+
+	<resultMap type="GameFilterBean" id="GameFilterBeanMap">
+		<result column="game_code" property="gameCode" />
+		<result column="language_code" property="languageCode" />
+		<result column="userid" property="userId" />
+		<result column="testtype" property="testType" />
+		<result column="user_name" property="userName" />
+		<result column="guid" property="guid" />
+		<result column="edit_name" property="editName" />
+		<result column="edit_date" property="editDate" />
+		<result column="auditor_name" property="auditorName" />
+		<result column="audit_date" property="auditDate" />
+		<result column="filter_type" property="filterType" />
+		<result column="test_button" property="testButton" />
+		<result column="channel_18" property="in18" />
+	</resultMap>
+	<select id="getGameFilterInGame" resultType="java.util.List"
+		resultMap="GameFilterBeanMap">
+		select
+		a.game as game_code,
+		b.language as language_code,
+		b.userid as userid,
+		b.guid as guid
+		from AD_GAME_ACTIVE a ,${gameTable} b
+		where a.idfa=b.adudid
+		and
+		a.ACTIVETIME like '${time}%'
+	</select>
+
+	<insert id="addGameUserIdFilterInfo">
+		insert into GAME_TEST_USERID_FILTER_TAB
+		(game_code,language_code,userid,testtype,user_name,guid,edit_name,edit_date,auditor_name,audit_date,filter_type,test_button,channel_18)
+		values
+		('${gameCode}','${languageCode}','${userId}','1','程序添加','${guid}','程序添加',to_date('${dateString}','yyyy-mm-dd hh24:mi:ss'),'程序添加',to_date('${dateString}','yyyy-mm-dd hh24:mi:ss'),1,1,'')
+	</insert>
+</mapper>
+	
+	
+	

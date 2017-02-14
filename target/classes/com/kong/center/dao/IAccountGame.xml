@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kong.center.dao.IAccountGame">
+
+
+	<resultMap type="AccountGameBean" id="AccountGameBeanMap">
+		<result column="code" property="code" />
+		<result column="paycenter_id" property="paycenterId" />
+		<result column="game_id" property="gameId" />
+		<result column="game" property="game" />
+		<result column="other_thing" property="otherThing" />
+		<result column="create_time" property="datetime" />
+	</resultMap>
+
+
+	<insert id="addAccountGame">
+		insert into game_center_account_game_tb
+		(paycenter_id,game_id,other_thing,game,create_time)
+		values
+		(#{paycenterId},#{gameId},#{otherThing},#{game},#{datetime})
+	</insert>
+
+	<select id="getAccountGameBean" resultMap="AccountGameBeanMap">
+		select * from
+		game_center_account_game_tb
+		where paycenter_id=#{guid}
+		and
+		game=#{game}
+
+	</select>
+
+	<select id="getGameByGuid" 
+		resultType="String">
+		select game from
+		game_center_account_game_tb
+		where
+		paycenter_id=#{guid}
+	</select>
+
+</mapper>
+	
+	
+	

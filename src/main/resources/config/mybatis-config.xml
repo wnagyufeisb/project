@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 为实体类起别名 -->
+	<typeAliases>
+		<typeAlias alias="ActivateLogBean" type="com.kong.center.beans.ActivateLogBean" />
+		<typeAlias alias="RegisterLogBean" type="com.kong.center.beans.RegisterLogBean" />
+		<typeAlias alias="UserInfoBean" type="com.kong.center.beans.UserInfoBean" />
+		<typeAlias alias="AccountGameBean" type="com.kong.center.beans.AccountGameBean" />
+		<typeAlias alias="LoadLogBean" type="com.kong.center.beans.LoadLogBean" />
+		<typeAlias alias="ResetPasswordLogBean"
+			type="com.kong.center.beans.ResetPasswordLogBean" />
+	</typeAliases>
+	<environments default="UserCenter">
+		<environment id="UserCenter">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://192.168.19.4:3306/paycenter"></property>
+				<property name="username" value="lvyao" />
+				<property name="password" value="lvyao123*" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<package name="com.kong.center.dao" />
+	</mappers>
+</configuration>

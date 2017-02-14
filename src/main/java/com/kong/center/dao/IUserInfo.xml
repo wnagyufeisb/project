@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kong.center.dao.IUserInfo">
+
+	<resultMap type="UserInfoBean" id="UserInfoBeanMap">
+		<result column="guid" property="guid" />
+		<result column="account" property="account" />
+		<result column="password" property="password" />
+		<result column="phone" property="phone" />
+		<result column="email" property="email" />
+		<result column="is_binding_email" property="isBindingEmail" />
+		<result column="third_party_account" property="thirdPartyAccount" />
+		<result column="user_type" property="userType" />
+		<result column="user_status" property="userStatus" />
+		<result column="device_id" property="deviceId" />
+		<result column="device_type" property="deviceType" />
+		<result column="system_version" property="systemVersion" />
+		<result column="system_type" property="systemType" />
+		<result column="other_info" property="otherInfo" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+
+	<update id="setUserInfo">
+		update game_center_userinfo_tb
+		set
+		account=#{account},
+		password=#{password},
+		phone=#{phone},
+		email=#{email},
+		is_binding_email=#{isBindingEmail},
+		third_party_account=#{thirdPartyAccount},
+		user_type=#{userType},
+		user_status=#{userStatus}
+		where
+		guid=#{guid}
+	</update>
+
+	<insert id="addUserInfo">
+		insert into game_center_userinfo_tb
+		(guid,account,password,phone,email,is_binding_email,third_party_account,user_type,user_status,device_id,device_type,system_version,system_type,other_info,create_time)
+		values
+		(#{guid},#{account},#{password},#{phone},#{email},'yes',#{thirdPartyAccount},#{userType},#{userStatus},#{deviceId},#{deviceType},#{systemVersion},#{systemType},#{otherInfo},#{createTime})
+	</insert>
+
+	<select id="getOfficeUserInfo" resultMap="UserInfoBeanMap">
+		select a.* from
+		game_center_userinfo_tb a, game_center_account_game_tb b
+		where
+		(a.account=#{account}
+		or
+		a.email=#{account}
+		or
+		a.phone=#{account})
+		and
+		a.guid=b.paycenter_id
+		and
+		b.game=#{game}
+		limit
+		0, 1
+	</select>
+	<select id="getUserInfoByGuid" resultMap="UserInfoBeanMap">
+		select * from
+		game_center_userinfo_tb
+		where
+		guid=#{guid}
+	</select>
+	<select id="getUserInfoByAccount" resultMap="UserInfoBeanMap">
+		select a.* from
+		game_center_userinfo_tb a, game_center_account_game_tb b
+		where
+		(a.account=#{account}
+		or
+		(a.email=#{account} and
+		a.is_binding_email='yes')
+		or
+		a.phone=#{account})
+		and
+		password=#{password}
+		limit
+		0, 1
+	</select>
+
+	<select id="getUserInfoByDevice" resultMap="UserInfoBeanMap">
+		select a.* from
+		game_center_userinfo_tb a, game_center_account_game_tb b
+		where
+		a.device_id=#{deviceId}
+		and
+		b.game=#{game}
+		and
+		a.guid=b.paycenter_id
+		and
+		user_type='guest1'
+		limit
+		0, 1
+	</select>
+
+	<select id="getUserInfoByThirdParty" resultMap="UserInfoBeanMap">
+		select a.* from
+		game_center_userinfo_tb a, game_center_account_game_tb b
+		where
+		a.third_party_account=#{thirdPartyAccount}
+		and
+		a.user_type=#{thirdPartyType}
+		and
+		a.guid=b.paycenter_id
+		and
+		b.game=#{game}
+		limit
+		0, 1
+	</select>
+
+	<select id="getUserInfoBythirdPartyAccount" resultMap="UserInfoBeanMap">
+		select *
+		from game_center_userinfo_tb
+		where
+		third_party_account=#{thirdPartyAccount}
+		and
+		user_type=#{thirdPartyType}
+		limit
+		0, 1
+	</select>
+
+	<select id="getUserInfoByOffice" resultMap="UserInfoBeanMap">
+		select * from
+		game_center_userinfo_tb
+		where
+		account=#{officeAccount}
+		or
+		(email=#{officeAccount} and is_binding_email='yes')
+		or
+		phone=#{officeAccount}
+		limit
+		0, 1
+	</select>
+
+	<select id="getUserInfoByDeviceId" resultMap="UserInfoBeanMap">
+		select * from
+		game_center_userinfo_tb
+		where
+		device_id=#{deviceId}
+		and
+		user_type='guest1'
+		limit
+		0, 1
+	</select>
+
+	<update id="setPassword">
+		update game_center_userinfo_tb
+		set
+		password=#{password}
+		where
+		guid=#{guid}
+	</update>
+</mapper>
+	
+	
+	
