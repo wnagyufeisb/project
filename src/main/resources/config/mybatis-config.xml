@@ -18,7 +18,7 @@
 			<transactionManager type="JDBC"></transactionManager>
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://192.168.19.4:3306/paycenter"></property>
+				<property name="url" value="jdbc:mysql://192.168.8.2:3306/paycenter"></property>
 				<property name="username" value="lvyao" />
 				<property name="password" value="lvyao123*" />
 			</dataSource>
