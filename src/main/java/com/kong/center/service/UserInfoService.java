@@ -1322,7 +1322,7 @@ public class UserInfoService {
 		if (userInfoBean.getThirdPartyAccount() != null
 				&& !"".equals(userInfoBean.getThirdPartyAccount())) {
 			jedis.close();
-			return new ResultBean<>(false, "第三方账号已经绑定，不能重复绑定",
+			return new ResultBean<>(false, "该账号已经绑定第三方账号，不能重复绑定",
 					ErrorCode.bindingThirtPartyExit, null);
 		}
 
